@@ -8,6 +8,8 @@ dependencies = [
     "httpx>=0.28.1",
     "python-dotenv>=1.2.2",
 ]
+[tool.mypy]
+mypy_path = "src"
 [tool.ruff]
 line-length = 80
 [tool.ruff.format]

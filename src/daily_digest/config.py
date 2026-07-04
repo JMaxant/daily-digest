@@ -1,14 +1,18 @@
 import os
 from dotenv import load_dotenv
 
-def get_config() -> dict[str, str]:
+def get_config() -> dict[str, str|list[str] ]:
     load_dotenv()
-    token = os.getenv('GITLAB_TOKEN')
-    url = os.getenv('GITLAB_URL')
-    if token is None or url is None:
-        raise RuntimeError('Both Gitlab url and token are required')
-
-    return {
-        'gitlab_url': url,
-        'gitlab_token': token,
+    required = {
+        'gitlab_url': os.getenv('GITLAB_URL'),
+        'gitlab_token': os.getenv('GITLAB_TOKEN'),
+        'gitlab_project_ids': os.getenv('GITLAB_PROJECT_IDS'),
     }
+
+    for key, value in required.items():
+        if value is None:
+            raise RuntimeError(f'{key} is required')
+
+    required['gitlab_project_ids'] = required['gitlab_project_ids'].split(',')
+
+    return required

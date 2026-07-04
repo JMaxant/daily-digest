@@ -1,18 +1,20 @@
 import os
 from dotenv import load_dotenv
 
-def get_config() -> dict[str, str|list[str] ]:
+from daily_digest.models import Config
+
+
+def get_config() -> Config:
     load_dotenv()
-    required = {
-        'gitlab_url': os.getenv('GITLAB_URL'),
-        'gitlab_token': os.getenv('GITLAB_TOKEN'),
-        'gitlab_project_ids': os.getenv('GITLAB_PROJECT_IDS'),
-    }
+    return Config(
+        gitlab_url=_require_env('GITLAB_URL'),
+        gitlab_token=_require_env('GITLAB_TOKEN'),
+        gitlab_project_ids=_require_env('GITLAB_PROJECT_IDS').split(','),
+    )
 
-    for key, value in required.items():
-        if value is None:
-            raise RuntimeError(f'{key} is required')
 
-    required['gitlab_project_ids'] = required['gitlab_project_ids'].split(',')
-
-    return required
+def _require_env(key: str) -> str:
+    value = os.getenv(key)
+    if value is None:
+        raise RuntimeError(f'{key} is required')
+    return value

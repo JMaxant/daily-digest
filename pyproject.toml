@@ -10,6 +10,7 @@ dependencies = [
 ]
 [tool.mypy]
 mypy_path = "src"
+explicit_package_bases = true
 [tool.ruff]
 line-length = 80
 [tool.ruff.format]

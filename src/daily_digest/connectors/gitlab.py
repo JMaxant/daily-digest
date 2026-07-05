@@ -14,6 +14,7 @@ def get_merge_requests(
         params=params,
         headers=headers,
     )
+
     return response.raise_for_status().json()
 
 

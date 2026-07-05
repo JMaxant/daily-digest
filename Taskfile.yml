@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+vars:
+  GREETING: Hello, world!
+
+tasks:
+  default:
+    desc: Print a greeting message
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  qa:
+    cmds:
+      - uv run pytest
+      - uv run pre-commit run --all-files
+
+  qa:fix:
+    cmd: uv run ruff format .
+
+  run:
+    cmd: uv run python -m daily_digest.main

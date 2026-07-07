@@ -2,23 +2,20 @@
 
 version: '3'
 
-vars:
-  GREETING: Hello, world!
-
 tasks:
   default:
-    desc: Print a greeting message
-    cmds:
-      - echo "{{.GREETING}}"
-    silent: true
+    cmd: task --list
 
   qa:
+    desc: Run quality assurance checks
     cmds:
       - uv run pytest
       - uv run pre-commit run --all-files
 
   qa:fix:
+    desc: Run quality assurance checks and fix issues
     cmd: uv run ruff format .
 
   run:
+    desc: Run the daily digest application
     cmd: uv run python -m daily_digest.main

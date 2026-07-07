@@ -10,6 +10,8 @@ def get_config() -> Config:
         gitlab_url=_require_env('GITLAB_URL'),
         gitlab_token=_require_env('GITLAB_TOKEN'),
         gitlab_project_ids=_require_env('GITLAB_PROJECT_IDS').split(','),
+        redmine_url=_require_env('REDMINE_URL'),
+        redmine_api_key=_require_env('REDMINE_API_KEY'),
     )
 
 

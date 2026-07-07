@@ -6,6 +6,8 @@ class Config:
     gitlab_url: str
     gitlab_token: str
     gitlab_project_ids: list[str]
+    redmine_url: str
+    redmine_api_key: str
 
 
 @dataclass

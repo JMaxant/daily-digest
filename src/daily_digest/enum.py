@@ -7,3 +7,8 @@ class GitlabMergeRequestsStatus(str, Enum):
     LOCKED = 'locked'
     MERGED = 'merged'
     ALL = 'all'
+
+
+class RedmineIssueRequest(str, Enum):
+    ASSIGNED = 'assigned'
+    EXPIRED = 'expired'

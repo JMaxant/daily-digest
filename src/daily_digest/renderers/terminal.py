@@ -12,3 +12,11 @@ def render_merge_requests(merge_requests_data: list[dict]) -> None:
         print(f'  {data["source_branch"]} -> {data["target_branch"]}')
         print(f'  {data["web_url"]}')
         print('-' * 60)
+
+
+def render_issues(issues: list[dict]) -> None:
+    for data in issues:
+        print(f'{data["project"]["name"]} - {data["subject"]} ')
+        print(f'Créé par: {data["author"]["name"]}')
+        print(f'  {data["description"][:200]}')
+        print('-' * 60)

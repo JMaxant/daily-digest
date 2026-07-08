@@ -4,9 +4,9 @@ import httpx
 import pytest
 
 from daily_digest.connectors.redmine import (
-    get_assigned_issues,
-    get_expired_issues,
+    get_issues,
 )
+from daily_digest.enum import RedmineIssueRequest
 
 
 @patch('daily_digest.connectors.redmine.httpx.get')
@@ -18,7 +18,7 @@ def test_get_assigned_issues_success(mock_get, config_fixture):
     }
 
     mock_get.return_value = mock_response
-    result = get_assigned_issues(config_fixture)
+    result = get_issues(config_fixture, RedmineIssueRequest.ASSIGNED)
     assert result == [{'id': 1, 'project': {'id': 1, 'name': 'Project 1'}}]
 
 
@@ -32,7 +32,7 @@ def test_get_assigned_issues_failure(mock_get, config_fixture):
 
     mock_get.return_value = mock_response
     with pytest.raises(httpx.HTTPStatusError, match='HTTP 500'):
-        get_assigned_issues(config_fixture)
+        get_issues(config_fixture, RedmineIssueRequest.ASSIGNED)
 
 
 @patch('daily_digest.connectors.redmine.httpx.get')
@@ -44,7 +44,7 @@ def test_get_expired_issues_success(mock_get, config_fixture):
     }
 
     mock_get.return_value = mock_response
-    result = get_expired_issues(config_fixture)
+    result = get_issues(config_fixture, RedmineIssueRequest.EXPIRED)
     assert result == [{'id': 1, 'project': {'id': 1, 'name': 'Project 1'}}]
 
 
@@ -58,4 +58,4 @@ def test_get_expired_issues_failure(mock_get, config_fixture):
 
     mock_get.return_value = mock_response
     with pytest.raises(httpx.HTTPStatusError, match='HTTP 500'):
-        get_expired_issues(config_fixture)
+        get_issues(config_fixture, RedmineIssueRequest.EXPIRED)

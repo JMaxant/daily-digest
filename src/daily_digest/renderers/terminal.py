@@ -14,15 +14,9 @@ def render_merge_requests(merge_requests_data: list[dict]) -> None:
         print('-' * 60)
 
 
-def render_assigned_issues(issues: list[dict]) -> None:
+def render_issues(issues: list[dict]) -> None:
     for data in issues:
         print(f'{data["project"]["name"]} - {data["subject"]} ')
+        print(f'Créé par: {data["author"]["name"]}')
         print(f'  {data["description"][:200]}')
-        print('-' * 60)
-
-
-def render_expired_issues(issues: list[dict]) -> None:
-    for data in issues:
-        print(f'{data["subject"]}')
-        print(f'  {data["description"]}')
         print('-' * 60)

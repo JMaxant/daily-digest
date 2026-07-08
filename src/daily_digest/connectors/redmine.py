@@ -38,3 +38,5 @@ def _build_params(request: RedmineIssueRequest) -> dict[str, str | int]:
                 'due_date': now.strftime('%Y-%m-%d'),
                 'limit': LIMIT,
             }
+        case _:
+            raise ValueError(f'Invalid request: {request}')

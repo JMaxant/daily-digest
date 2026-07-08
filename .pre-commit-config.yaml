@@ -6,10 +6,14 @@ repos:
         args: [--fix]
       - id: ruff-format
         args: [--check]
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.1.0
+  - repo: local
     hooks:
       - id: mypy
+        name: mypy
+        language: system
+        pass_filenames: false
+        always_run: true
+        entry: uv run mypy .
   - repo: local
     hooks:
       - id: pytest

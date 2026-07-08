@@ -7,7 +7,11 @@ LIMIT = 25
 
 def get_assigned_issues(config: Config) -> list[dict]:
     """Get assigned issues from Redmine."""
-    params = {'assigned_to_id': 'me', 'sort': 'updated_on:desc', 'limit': LIMIT}
+    params: dict[str, str | int] = {
+        'assigned_to_id': 'me',
+        'sort': 'updated_on:desc',
+        'limit': LIMIT,
+    }
     headers = {'X-Redmine-API-Key': config.redmine_api_key}
 
     response = httpx.get(

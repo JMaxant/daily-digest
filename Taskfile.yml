@@ -7,14 +7,14 @@ tasks:
     cmd: task --list
 
   qa:
-    desc: Run quality assurance checks
-    cmds:
-      - uv run pytest
-      - uv run pre-commit run --all-files
+    desc: Run all quality checks (lint, format, types, tests)
+    cmd: uv run pre-commit run --all-files
 
   qa:fix:
-    desc: Run quality assurance checks and fix issues
-    cmd: uv run ruff format .
+    desc: Auto-fix lint and formatting issues
+    cmds:
+      - uv run ruff check --fix .
+      - uv run ruff format .
 
   run:
     desc: Run the daily digest application

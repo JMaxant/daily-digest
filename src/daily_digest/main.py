@@ -13,9 +13,12 @@ from daily_digest.renderers.terminal import (
 def main():
     config = get_config()
     result = get_merge_requests(config)
+    print('=== MERGE REQUESTS ===')
     render_merge_requests(result)
 
+    print('=== ISSUES ASSIGNED ===')
     render_issues(get_issues(config, RedmineIssueRequest.ASSIGNED))
+    print('=== ISSUES EXPIRED ===')
     render_issues(get_issues(config, RedmineIssueRequest.EXPIRED))
 
 
